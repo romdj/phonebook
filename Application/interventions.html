@@ -1,0 +1,121 @@
+<div id="table_interventions" class="table-responsive" style="overflow:auto; max-height:650px; margin-top:15px;" >
+    <table id="interventions-table" class="table table-striped table-bordered" style="text-align:center;">
+        <tr class="active" style="font-size:18px;">
+          <th nowrap>
+            Select
+          </th>
+          <th nowrap>
+            ID
+            <span class="glyphicon glyphicon-filter"></span>
+            <input type="checkbox" ng-model="filterKey"/>
+          </th>
+          <th nowrap>
+            Created by
+            <span class="glyphicon glyphicon-filter"></span>
+            <input type="checkbox" ng-model="filterUser"/>
+          </th>
+          <th nowrap>
+            TRS
+            <input type="checkbox" ng-model="filterTRS"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+          <th nowrap>
+            Module
+            <input type="checkbox" ng-model="filterModule"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+          <th nowrap>
+            Description
+            <input type="checkbox" ng-model="filterDescription"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+          <th nowrap>
+            Creation time
+            <input type="checkbox" ng-model="filterStart"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+          <th nowrap>
+            End time
+            <input type="checkbox" ng-model="filterEnd"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+          <th nowrap>
+            Type
+            <input type="checkbox" ng-model="filterType"/>
+            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+          </th>
+        </tr>
+        <tr>
+          <th>
+          </th>
+          <th>
+            <input type="text" ng-show="filterKey" ng-model="search.pkey"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterUser" ng-model="search.trsuser"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterTRS" ng-model="search.trs"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterModule" ng-model="search.module"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterDescription" ng-model="search.breakdowndescription"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterStart" ng-model="search.interventionstart"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterEnd" ng-model="search.interventionend"/>
+          </th>
+          <th>
+            <input type="text" ng-show="filterType" ng-model="search.interventiontype"/>
+          </th>
+        </tr>
+        <tr ng-repeat="bt in Screen.data.interventions | filter:search" style="font-size:16px;vertical-align: center;">
+          <td>
+            <input type="checkbox" ng-model="bt.selected"/>
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.pkey}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.trsuser}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.trs}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.module}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.breakdowndescription}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.interventionstart}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.interventionend}}
+          </td>
+          <td ng-click="clickText(bt)">
+            {{bt.interventiontype}}
+          </td>
+        </tr>
+    </table>
+  </div>
+  <div style="margin-top:3%;" class="title-app">Total Interventions: {{Screen.data.interventions.length}}</div>
+  <button class="roundButtonSecondary {{Screen.data.view.buttons[0].color}}" ng-mousedown="click(Screen.data.view.buttons[0].value)" ng-disabled="Screen.data.view.buttons[0].disabled" type="button" style="position:fixed; right:25px; bottom:300px;">
+    {{Screen.data.view.buttons[0].label}}
+    <span ng-if="Screen.data.view.buttons[0].glyphicon" class="{{Screen.data.view.buttons[0].glyphicon}}"/>
+  </button>
+  <button class="roundButtonSecondary {{Screen.data.view.buttons[1].color}}" ng-mousedown="clickDelete(Screen.data.view.buttons[1].value, Screen.data.interventions)" ng-disabled="Screen.data.view.buttons[1].disabled" type="button" style="position:fixed; right:25px; bottom:200px;">
+    {{Screen.data.view.buttons[1].label}}
+    <span ng-if="Screen.data.view.buttons[1].glyphicon" class="{{Screen.data.view.buttons[1].glyphicon}}"/>
+  </button>
+  <button class="roundButtonSecondary {{Screen.data.view.buttons[2].color}}" ng-mousedown="exportTable(Screen.data.interventions)" type="button" style="position:fixed; right:25px; bottom:100px;">
+    {{Screen.data.view.buttons[2].label}}
+    <span ng-if="Screen.data.view.buttons[2].glyphicon" class="{{Screen.data.view.buttons[2].glyphicon}}"/>
+  </button>
+  
+  <!-- <button class="btn btn-lg btn-warning" ng-click="exportTable(Screen.data.interventions)">Export table as CSV</button> -->
