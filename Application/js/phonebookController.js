@@ -15,7 +15,7 @@ myAppModule.controller('phonebookController', function ($scope, $http, $location
       .error(function (error) {
         console.log("error Fetching Data : " + error);
       });
-    setTimeout($scope.fetchData, 2000);
+    setTimeout($scope.fetchData, 200);
   }
 
   $scope.addContact = function(newName,newTel){

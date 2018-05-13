@@ -39,14 +39,16 @@ function addPhonebook(req, res) {
 
 function delPhonebook(req, res) {
   Contact.deleteOne({
-    id: req.params.phonebookId
+    _id: req.params.phonebookId
   }, (err) => {
-    console.log('couldn\'t delete element', req.params.phonebookId);
-    res.status(500).send('Error at Deletion: ');
-    // return;
+    if (err) {
+      console.log('couldn\'t delete element', req.params.phonebookId);
+      res.status(500).send('Error at Deletion: ');
+    } else {
+      console.log('deleted element:', req.params.phonebookId);
+      res.status(200).send('deleted Contact');
+    }
   })
-  // console.log('deleted element:', req.params.phonebookId);
-  // res.status(200).send('deleted Contact');
 }
 
 function getPhonebooks(req, res) {
