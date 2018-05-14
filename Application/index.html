@@ -20,64 +20,65 @@
 
 <body ng-app="phonebookApp">
   <div ng-controller="phonebookController">
-    <h1 class="alert alert-info" role="alert">Phonebook CRUD</h1>
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" nowrap>
-            Name
-            <input type="checkbox" ng-model="filterName" />
-          </th>
-          <th scope="col" nowrap>
-            Phone Number
-            <input type="checkbox" ng-model="filterPhoneNumber" />
-          </th>
-          <th scope="col" nowrap>
-            Actions
-            <input type="checkbox" ng-model="filterKey" />
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <input type="text" ng-show="filterName" ng-model="search.name" />
-          </th>
-          <th>
-            <input type="text" ng-show="filterPhoneNumber" ng-model="search.tel" />
-          </th>
-          <th>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="contact in data | filter:search">
-          <td>
-            {{contact.name}}
-          </td>
-          <td>
-            {{contact.tel}}
-          </td>
-          <td>
-            actions
-            <button type="button" ng-click="deleteContact(contact._id)" class="btn btn-danger">Remove</button>
-            <button type="button" class="btn btn-info">Edit</button>
-            
-          </td>
-        </tr>
-        <form ng-submit="addContact(newName,newTel)">
+    <div class="container">
+      <h1 class="alert alert-info" role="alert">Phonebook CRUD</h1>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" nowrap>
+              Name
+              <input type="checkbox" ng-model="filterName" />
+            </th>
+            <th scope="col" nowrap>
+              Phone Number
+              <input type="checkbox" ng-model="filterPhoneNumber" />
+            </th>
+            <th scope="col" nowrap>
+              <!-- <input type="checkbox" ng-model="filterKey" /> -->
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <input type="text" ng-show="filterName" ng-model="search.name" />
+            </th>
+            <th>
+              <input type="text" ng-show="filterPhoneNumber" ng-model="search.tel" />
+            </th>
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="contact in data | filter:search">
+            <td>
+              {{contact.name}}
+              <input type="text" ng-model="editName" placeholder="New Name" ng-if="contact.edit"/>
+            </td>
+            <td>
+              {{contact.tel}}
+              <input type="text" ng-model="editTel" placeholder="New Phone Number" ng-if="contact.edit"/>
+            </td>
+            <td>
+              <button type="button" ng-click="deleteContact(contact._id)" class="btn btn-danger">Remove</button>
+              <button type="button" class="btn btn-info" ng-click="enterEdition(contact._id)" ng-if="!contact.edit">Edit</button>
+              <button type="button" class="btn btn-success" ng-disabled="!validateForm(editName,editTel)" ng-if="contact.edit">Edit</button>
+            </td>
+          </tr>
+          <form ng-submit="addContact(newName,newTel)">
+            <td>
+              <input type="text" ng-model="newName" placeholder="Name" />
+            </td>
+            <td>
+              <input type="text" ng-model="newTel" placeholder="+39 02 1234567" />
+            </td>
+            <td>
+              <button type="submit" class="btn btn-primary" ng-disabled="!validateForm(newName,newTel)">Add</button>
+            </td>
+          </form>
 
-          <td>
-            <input type="text" ng-model="newName" />
-          </td>
-          <td>
-            <input type="text" ng-model="newTel" />
-          </td>
-          <td>
-            <button type="submit" class="btn btn-primary">Add</button>
-          </td>
-        </form>
-
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>
 
