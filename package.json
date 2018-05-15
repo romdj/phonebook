@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules webserserver.mjs",
-    "start-dev": "nodemon --experimental-modules webserserver.mjs",
+    "start": "node expressserver.js",
+    "start-dev": "nodemon expressserver.js",
     "test-mocha": "mocha",
     "test": "jasmine"
   },
