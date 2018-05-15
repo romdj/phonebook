@@ -81,7 +81,9 @@ myAppModule.controller('phonebookController', function ($scope, $http, $location
         console.log(contact);
       }
     }
-
+  }
+  $scope.testTrue = function(input){
+    return true;
   }
   init();
 });
